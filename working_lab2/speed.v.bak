@@ -1,0 +1,17 @@
+module speed(clk, speed_up_event, speed_down_event, speed_reset_event, clk_count_to);
+
+input clk, speed_up_event, speed_down_event, speed_reset_event;
+output reg[31:0] clk_count_to;
+
+always @(posedge clk) begin
+
+	if(speed_up_event) 
+	clk_count_to <= (clk_count_to - 32'd10);
+	else if(speed_down_event)
+	clk_count_to <= (clk_count_to + 32'd10); 
+	else if(speed_reset_event)
+	clk_count_to <= 32'd1136;
+	else clk_count_to <= clk_count_to; end
+
+endmodule
+
